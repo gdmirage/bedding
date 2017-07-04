@@ -1,0 +1,14 @@
+server:
+  port: 8888
+
+
+spring:
+  thymeleaf:
+    cache: false
+    encoding: utf-8
+    prefix: classpath:/templates/
+    content-type: text/html
+    mode: HTML5
+#  mvc:
+#    favicon:
+#      enabled: false
