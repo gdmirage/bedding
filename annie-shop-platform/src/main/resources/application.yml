@@ -17,7 +17,7 @@ spring:
     mode: HTML5
   profiles: dev
   datasource:
-    url: jdbc:mysql://192.168.20.110:3306/annie_shop?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/annie_shop?useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
