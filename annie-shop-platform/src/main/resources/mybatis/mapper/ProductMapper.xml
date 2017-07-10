@@ -1,210 +1,163 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.annie.dao.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com.annie.entity.Product" >
-    <id column="PRODUCT_ID" property="productId" jdbcType="BIGINT" />
-    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
-    <result column="PRODUCT_UNIT" property="productUnit" jdbcType="VARCHAR" />
-    <result column="PRODUCT_MAIN_PIC" property="productMainPic" jdbcType="VARCHAR" />
-    <result column="ROOT_TYPE_ID" property="rootTypeId" jdbcType="INTEGER" />
-    <result column="PARENT_TYPE_ID" property="parentTypeId" jdbcType="INTEGER" />
-    <result column="PRODUCT_TYPE_ID" property="productTypeId" jdbcType="INTEGER" />
-    <result column="CREATE_MAN" property="createMan" jdbcType="INTEGER" />
-    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="MODIFY_MAN" property="modifyMan" jdbcType="INTEGER" />
-    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
-    <result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.annie.entity.Product" extends="BaseResultMap" >
-    <result column="PRODUCT_CONTENT" property="productContent" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    PRODUCT_ID, PRODUCT_NAME, PRODUCT_UNIT, PRODUCT_MAIN_PIC, ROOT_TYPE_ID, PARENT_TYPE_ID, 
-    PRODUCT_TYPE_ID, CREATE_MAN, CREATE_DATE, MODIFY_MAN, MODIFY_DATE, IS_DELETE
-  </sql>
-  <sql id="Blob_Column_List" >
-    PRODUCT_CONTENT
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from product
-    where PRODUCT_ID = #{productId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from product
-    where PRODUCT_ID = #{productId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.annie.entity.Product" >
-    insert into product (PRODUCT_ID, PRODUCT_NAME, PRODUCT_UNIT, 
-      PRODUCT_MAIN_PIC, ROOT_TYPE_ID, PARENT_TYPE_ID, 
-      PRODUCT_TYPE_ID, CREATE_MAN, CREATE_DATE, 
-      MODIFY_MAN, MODIFY_DATE, IS_DELETE, 
-      PRODUCT_CONTENT)
-    values (#{productId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{productUnit,jdbcType=VARCHAR}, 
-      #{productMainPic,jdbcType=VARCHAR}, #{rootTypeId,jdbcType=INTEGER}, #{parentTypeId,jdbcType=INTEGER}, 
-      #{productTypeId,jdbcType=INTEGER}, #{createMan,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{modifyMan,jdbcType=INTEGER}, #{modifyDate,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=CHAR}, 
-      #{productContent,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.annie.entity.Product" >
-    insert into product
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="productId != null" >
-        PRODUCT_ID,
-      </if>
-      <if test="productName != null" >
-        PRODUCT_NAME,
-      </if>
-      <if test="productUnit != null" >
-        PRODUCT_UNIT,
-      </if>
-      <if test="productMainPic != null" >
-        PRODUCT_MAIN_PIC,
-      </if>
-      <if test="rootTypeId != null" >
-        ROOT_TYPE_ID,
-      </if>
-      <if test="parentTypeId != null" >
-        PARENT_TYPE_ID,
-      </if>
-      <if test="productTypeId != null" >
-        PRODUCT_TYPE_ID,
-      </if>
-      <if test="createMan != null" >
-        CREATE_MAN,
-      </if>
-      <if test="createDate != null" >
-        CREATE_DATE,
-      </if>
-      <if test="modifyMan != null" >
-        MODIFY_MAN,
-      </if>
-      <if test="modifyDate != null" >
-        MODIFY_DATE,
-      </if>
-      <if test="isDelete != null" >
-        IS_DELETE,
-      </if>
-      <if test="productContent != null" >
-        PRODUCT_CONTENT,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="productId != null" >
-        #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="productName != null" >
-        #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productUnit != null" >
-        #{productUnit,jdbcType=VARCHAR},
-      </if>
-      <if test="productMainPic != null" >
-        #{productMainPic,jdbcType=VARCHAR},
-      </if>
-      <if test="rootTypeId != null" >
-        #{rootTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="parentTypeId != null" >
-        #{parentTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="productTypeId != null" >
-        #{productTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="createMan != null" >
-        #{createMan,jdbcType=INTEGER},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyMan != null" >
-        #{modifyMan,jdbcType=INTEGER},
-      </if>
-      <if test="modifyDate != null" >
-        #{modifyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null" >
-        #{isDelete,jdbcType=CHAR},
-      </if>
-      <if test="productContent != null" >
-        #{productContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.annie.entity.Product" >
-    update product
-    <set >
-      <if test="productName != null" >
-        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productUnit != null" >
-        PRODUCT_UNIT = #{productUnit,jdbcType=VARCHAR},
-      </if>
-      <if test="productMainPic != null" >
-        PRODUCT_MAIN_PIC = #{productMainPic,jdbcType=VARCHAR},
-      </if>
-      <if test="rootTypeId != null" >
-        ROOT_TYPE_ID = #{rootTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="parentTypeId != null" >
-        PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="productTypeId != null" >
-        PRODUCT_TYPE_ID = #{productTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="createMan != null" >
-        CREATE_MAN = #{createMan,jdbcType=INTEGER},
-      </if>
-      <if test="createDate != null" >
-        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyMan != null" >
-        MODIFY_MAN = #{modifyMan,jdbcType=INTEGER},
-      </if>
-      <if test="modifyDate != null" >
-        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null" >
-        IS_DELETE = #{isDelete,jdbcType=CHAR},
-      </if>
-      <if test="productContent != null" >
-        PRODUCT_CONTENT = #{productContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where PRODUCT_ID = #{productId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.annie.entity.Product" >
-    update product
-    set PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
-      PRODUCT_UNIT = #{productUnit,jdbcType=VARCHAR},
-      PRODUCT_MAIN_PIC = #{productMainPic,jdbcType=VARCHAR},
-      ROOT_TYPE_ID = #{rootTypeId,jdbcType=INTEGER},
-      PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER},
-      PRODUCT_TYPE_ID = #{productTypeId,jdbcType=INTEGER},
-      CREATE_MAN = #{createMan,jdbcType=INTEGER},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      MODIFY_MAN = #{modifyMan,jdbcType=INTEGER},
-      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
-      IS_DELETE = #{isDelete,jdbcType=CHAR},
-      PRODUCT_CONTENT = #{productContent,jdbcType=LONGVARCHAR}
-    where PRODUCT_ID = #{productId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.annie.entity.Product" >
-    update product
-    set PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
-      PRODUCT_UNIT = #{productUnit,jdbcType=VARCHAR},
-      PRODUCT_MAIN_PIC = #{productMainPic,jdbcType=VARCHAR},
-      ROOT_TYPE_ID = #{rootTypeId,jdbcType=INTEGER},
-      PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER},
-      PRODUCT_TYPE_ID = #{productTypeId,jdbcType=INTEGER},
-      CREATE_MAN = #{createMan,jdbcType=INTEGER},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      MODIFY_MAN = #{modifyMan,jdbcType=INTEGER},
-      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
-      IS_DELETE = #{isDelete,jdbcType=CHAR}
-    where PRODUCT_ID = #{productId,jdbcType=BIGINT}
-  </update>
+<mapper namespace="com.annie.dao.ProductMapper">
+    <resultMap id="BaseResultMap" type="com.annie.entity.Product">
+        <id column="PRODUCT_ID" property="productId" jdbcType="BIGINT"/>
+        <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR"/>
+        <result column="PRODUCT_UNIT" property="productUnit" jdbcType="VARCHAR"/>
+        <result column="PRODUCT_MAIN_PIC" property="productMainPic" jdbcType="VARCHAR"/>
+        <result column="ROOT_TYPE_ID" property="rootTypeId" jdbcType="INTEGER"/>
+        <result column="PARENT_TYPE_ID" property="parentTypeId" jdbcType="INTEGER"/>
+        <result column="PRODUCT_TYPE_ID" property="productTypeId" jdbcType="INTEGER"/>
+        <result column="CREATE_MAN" property="createMan" jdbcType="INTEGER"/>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="MODIFY_MAN" property="modifyMan" jdbcType="INTEGER"/>
+        <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP"/>
+        <result column="IS_DELETE" property="isDelete" jdbcType="CHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.annie.entity.Product" extends="BaseResultMap">
+        <result column="PRODUCT_CONTENT" property="productContent" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        PRODUCT_ID, PRODUCT_NAME, PRODUCT_UNIT, PRODUCT_MAIN_PIC, ROOT_TYPE_ID, PARENT_TYPE_ID,
+        PRODUCT_TYPE_ID, CREATE_MAN, CREATE_DATE, MODIFY_MAN, MODIFY_DATE, IS_DELETE
+    </sql>
+    <sql id="Blob_Column_List">
+        PRODUCT_CONTENT
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from product
+        where PRODUCT_ID = #{productId,jdbcType=BIGINT}
+    </select>
+    <insert id="insertSelective" parameterType="com.annie.entity.Product">
+        insert into product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                PRODUCT_ID,
+            </if>
+            <if test="productName != null">
+                PRODUCT_NAME,
+            </if>
+            <if test="productUnit != null">
+                PRODUCT_UNIT,
+            </if>
+            <if test="productMainPic != null">
+                PRODUCT_MAIN_PIC,
+            </if>
+            <if test="rootTypeId != null">
+                ROOT_TYPE_ID,
+            </if>
+            <if test="parentTypeId != null">
+                PARENT_TYPE_ID,
+            </if>
+            <if test="productTypeId != null">
+                PRODUCT_TYPE_ID,
+            </if>
+            <if test="createMan != null">
+                CREATE_MAN,
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE,
+            </if>
+            <if test="modifyMan != null">
+                MODIFY_MAN,
+            </if>
+            <if test="modifyDate != null">
+                MODIFY_DATE,
+            </if>
+            <if test="isDelete != null">
+                IS_DELETE,
+            </if>
+            <if test="productContent != null">
+                PRODUCT_CONTENT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productUnit != null">
+                #{productUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="productMainPic != null">
+                #{productMainPic,jdbcType=VARCHAR},
+            </if>
+            <if test="rootTypeId != null">
+                #{rootTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="parentTypeId != null">
+                #{parentTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="productTypeId != null">
+                #{productTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="createMan != null">
+                #{createMan,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyMan != null">
+                #{modifyMan,jdbcType=INTEGER},
+            </if>
+            <if test="modifyDate != null">
+                #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=CHAR},
+            </if>
+            <if test="productContent != null">
+                #{productContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.annie.entity.Product">
+        update product
+        <set>
+            <if test="productName != null">
+                PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productUnit != null">
+                PRODUCT_UNIT = #{productUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="productMainPic != null">
+                PRODUCT_MAIN_PIC = #{productMainPic,jdbcType=VARCHAR},
+            </if>
+            <if test="rootTypeId != null">
+                ROOT_TYPE_ID = #{rootTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="parentTypeId != null">
+                PARENT_TYPE_ID = #{parentTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="productTypeId != null">
+                PRODUCT_TYPE_ID = #{productTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="createMan != null">
+                CREATE_MAN = #{createMan,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyMan != null">
+                MODIFY_MAN = #{modifyMan,jdbcType=INTEGER},
+            </if>
+            <if test="modifyDate != null">
+                MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                IS_DELETE = #{isDelete,jdbcType=CHAR},
+            </if>
+            <if test="productContent != null">
+                PRODUCT_CONTENT = #{productContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where PRODUCT_ID = #{productId,jdbcType=BIGINT}
+    </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.annie.service;
 
 import com.annie.dao.ProductMapper;
+import com.annie.entity.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,15 @@ public class DAOTest {
     private ProductMapper productMapper;
 
     @Test
-    public void test(){
+    public void test() {
         System.out.println(productMapper.selectByPrimaryKey(1L));
     }
+
+    @Test
+    public void create() {
+        Product p = new Product();
+        p.setProductName("abcde");
+        productMapper.insertSelective(p);
+    }
+
 }
