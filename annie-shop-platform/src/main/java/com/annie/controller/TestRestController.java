@@ -24,13 +24,13 @@ public class TestRestController {
     public ModelAndView toIndex(Map<String,Object> map) {
         map.put("hello", "modelAndView");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
+        mv.setViewName("/html/index");
         mv.addAllObjects(map);
         return mv;
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ResponseBody
+//    @ResponseBody
     public Map<String,Object> test() {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("hello", "modelAndView");

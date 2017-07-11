@@ -6,6 +6,7 @@ import com.annie.entity.ProductType;
 import com.annie.service.ProductTypeService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,8 @@ public class ProductTypeController {
     @Resource(name = "productTypeService")
     private ProductTypeService productTypeService;
 
+    private final String VIEW_PATH = "/html/productType/";
+
     @RequestMapping(value = "/findProductTypePage")
     public ResultDto<PageInfo<ProductType>> findProductTypePage(@RequestParam(value = "pageSize", defaultValue = Constant.PAGE_SIZE) int pageSize,
                                                                  @RequestParam(value = "pageNum", defaultValue = Constant.PAGE_NUM) int pageNum){
@@ -28,6 +31,9 @@ public class ProductTypeController {
         resultDto.setResultData(productTypePageInfo);
         resultDto.setResultCode("");
         resultDto.setResultMsg("");
+        ModelAndView mv = new ModelAndView();
+        mv.addObject(productTypePageInfo);
+        mv.setViewName(VIEW_PATH + "product_type_list");
         return resultDto;
     }
 
