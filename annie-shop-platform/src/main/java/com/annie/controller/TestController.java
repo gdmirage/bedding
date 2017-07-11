@@ -29,4 +29,10 @@ public class TestController {
         map.put("hello", "modelAndView");
         return map;
     }
+
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    public String toProductList(Map<String,Object> map) {
+        map.put("hello", "bad boy");
+        return "/html/product/product_list";
+    }
 }

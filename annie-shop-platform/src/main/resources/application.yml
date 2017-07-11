@@ -12,7 +12,7 @@ spring:
   thymeleaf:
     cache: false
     encoding: utf-8
-    prefix: classpath:/templates/
+    prefix: classpath:/static/
     content-type: text/html
     mode: HTML5
   profiles: dev

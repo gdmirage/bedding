@@ -24,7 +24,7 @@ public class TestRestController {
     public ModelAndView toIndex(Map<String,Object> map) {
         map.put("hello", "modelAndView");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("helloHtml");
+        mv.setViewName("index");
         mv.addAllObjects(map);
         return mv;
     }
