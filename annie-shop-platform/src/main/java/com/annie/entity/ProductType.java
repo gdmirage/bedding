@@ -11,7 +11,7 @@ public class ProductType {
 
     private Integer parentId;
 
-    private Integer level;
+    private Integer nodeLevel;
 
     private String isUse;
 
@@ -57,12 +57,12 @@ public class ProductType {
         this.parentId = parentId;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getNodeLevel() {
+        return nodeLevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setNodeLevel(Integer nodeLevel) {
+        this.nodeLevel = nodeLevel;
     }
 
     public String getIsUse() {

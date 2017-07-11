@@ -6,7 +6,7 @@
         <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR"/>
         <result column="PIC_PATH" property="picPath" jdbcType="VARCHAR"/>
         <result column="PARENT_ID" property="parentId" jdbcType="INTEGER"/>
-        <result column="LEVEL" property="level" jdbcType="INTEGER"/>
+        <result column="NODE_LEVEL" property="nodeLevel" jdbcType="INTEGER"/>
         <result column="IS_USE" property="isUse" jdbcType="CHAR"/>
         <result column="IS_DELETE" property="isDelete" jdbcType="CHAR"/>
         <result column="CREATE_MAN" property="createMan" jdbcType="INTEGER"/>
@@ -15,7 +15,7 @@
         <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, TYPE_NAME, PIC_PATH, PARENT_ID, LEVEL, IS_USE, IS_DELETE, CREATE_MAN, CREATE_DATE,
+        ID, TYPE_NAME, PIC_PATH, PARENT_ID, NODE_LEVEL, IS_USE, IS_DELETE, CREATE_MAN, CREATE_DATE,
         MODIFY_MAN, MODIFY_DATE
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -23,6 +23,12 @@
         <include refid="Base_Column_List"/>
         from product_type
         where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectProductTypeList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_type
+        where IS_DELETE = 'N'
     </select>
     <insert id="insertProductType" parameterType="com.annie.entity.ProductType">
         insert into product_type
@@ -39,8 +45,8 @@
             <if test="parentId != null">
                 PARENT_ID,
             </if>
-            <if test="level != null">
-                LEVEL,
+            <if test="nodeLevel != null">
+                NODE_LEVEL,
             </if>
             <if test="isUse != null">
                 IS_USE,
@@ -74,8 +80,8 @@
             <if test="parentId != null">
                 #{parentId,jdbcType=INTEGER},
             </if>
-            <if test="level != null">
-                #{level,jdbcType=INTEGER},
+            <if test="nodeLevel != null">
+                #{nodeLevel,jdbcType=INTEGER},
             </if>
             <if test="isUse != null">
                 #{isUse,jdbcType=CHAR},
@@ -109,8 +115,8 @@
             <if test="parentId != null">
                 PARENT_ID = #{parentId,jdbcType=INTEGER},
             </if>
-            <if test="level != null">
-                LEVEL = #{level,jdbcType=INTEGER},
+            <if test="nodeLevel != null">
+                NODE_LEVEL = #{nodeLevel,jdbcType=INTEGER},
             </if>
             <if test="isUse != null">
                 IS_USE = #{isUse,jdbcType=CHAR},

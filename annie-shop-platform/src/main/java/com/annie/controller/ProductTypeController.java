@@ -1,10 +1,11 @@
 package com.annie.controller;
 
+import com.annie.constant.Constant;
+import com.annie.dto.ResultDto;
 import com.annie.entity.ProductType;
 import com.annie.service.ProductTypeService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.pagehelper.PageInfo;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -19,7 +20,19 @@ public class ProductTypeController {
     @Resource(name = "productTypeService")
     private ProductTypeService productTypeService;
 
-    public void createProductType(@PathVariable("typeName") String typeName, @PathVariable("parentId") Integer parentId, @PathVariable("isUse") String isUse, @PathVariable("picPath") String picPath) {
+    @RequestMapping(value = "/findProductTypePage")
+    public ResultDto<PageInfo<ProductType>> findProductTypePage(@RequestParam(value = "pageSize", defaultValue = Constant.PAGE_SIZE) int pageSize,
+                                                                 @RequestParam(value = "pageNum", defaultValue = Constant.PAGE_NUM) int pageNum){
+        ResultDto<PageInfo<ProductType>> resultDto=new ResultDto<PageInfo<ProductType>>();
+        PageInfo<ProductType> productTypePageInfo = productTypeService.findProductTypePage(null, pageSize, pageNum);
+        resultDto.setResultData(productTypePageInfo);
+        resultDto.setResultCode("");
+        resultDto.setResultMsg("");
+        return resultDto;
+    }
+
+    @RequestMapping(value = "/create")
+    public void createProductType(@RequestParam("typeName") String typeName, @RequestParam("parentId") Integer parentId, @RequestParam("isUse") String isUse, @RequestParam("picPath") String picPath) {
         ProductType productType = new ProductType();
         productType.setTypeName(typeName);
         productType.setParentId(parentId);
