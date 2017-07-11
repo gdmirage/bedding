@@ -9,6 +9,7 @@ import Abstract from './components/Abstract.vue'
 
 // 商品中心   Begin---------
 // 分类管理
+import ProductTypeManager from './components/goods/productType/ProductTypeManager.vue'
 import ProductCategoryManager from './components/goods/category/CategoryManager.vue'
 
 //单件商品管理
@@ -62,7 +63,13 @@ let routes = [
                         path: 'categoryManager',
                         name: '分类管理',
                         component: ProductCategoryManager,
-                    },{
+                    },
+                    {
+                        path: 'productTypeManager',
+                        name: '商品分类管理',
+                        component: ProductTypeManager,
+                    },
+                    {
                         path: 'singleProductManager',
                         name: '单品列表管理',
                         component: Abstract,

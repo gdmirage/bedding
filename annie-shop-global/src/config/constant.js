@@ -16,7 +16,9 @@ const goods = {
     findListResult: HTTP_URL + "/goods/categoryApi/findList2TreeResult",// 分类管理页
     saveResult: HTTP_URL + "/goods/categoryApi/saveResult",// 保存分类
     updateResult: HTTP_URL + "/goods/categoryApi/updateResult",// 更新分类
-    findByIdResult: HTTP_URL + "/goods/categoryApi/findByIdResult"// 更新分类
+    findByIdResult: HTTP_URL + "/goods/categoryApi/findByIdResult",// 更新分类
+
+    findProductTypePage: HTTP_URL + "/productType/findProductTypePage" // 商品分类列表
 };
 
 export {common, goods};
