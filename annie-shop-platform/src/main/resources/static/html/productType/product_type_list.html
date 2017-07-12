@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
     product_type_list
+    <br/>
+    ============
+    <br/>
+    <th:value>${productTypePageInfo.pageNum}</th:value>
+    <br/>
+    ============
+    <br/>
+    <p th:text="${productTypePageInfo}">222</p>
+    <br/>
+    ============
+    <br/>
+    <input value="123456" th:value="${productTypePageInfo}"/>
+    <a href="#" th:text="${productTypePageInfo}">ss</a>
+    <br/>
+    ============
+    <br/>
+    <div th:each="productType:${productTypePageInfo.list}">
+        <div th:text="${productType.typeName}"></div>
+    </div>
+11111
 </body>
 </html>
