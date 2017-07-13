@@ -32,14 +32,13 @@
                 </div>
                 <div class="row" id="selectDiv">
                     <div class="col-md-6">
-                        <span>名称：</span><input id="typeName" value="12" selectValue="true" th:value="${productTypePageInfo}"/>
+                        <span>名称：</span><input id="typeName" selectValue="true" th:value="${productTypePageInfo.pageSize}"/>
                         <span>是否有效：</span><input class="Wdate" id="d15" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                         <span>名称：</span>
                         <select selectValue="true" id="isUse">
-                            <option th:value="${productTypePageInfo}" />
-                            <option th:value="${productTypePageInfo.total}" selected="selected"/>
+                            <option th:value="${productTypePageInfo}" th:text="${productTypePageInfo}"></option>
+                            <option th:value="${productTypePageInfo.total}" selected="selected" th:text="${productTypePageInfo.total}"></option>
                         </select>
-
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -65,6 +64,10 @@
                         <tfoot>
                             <tr>
                                 <td>
+                                    <!-- 定义的请求路径地址 -->
+                                    <input type="hidden" th:value="${requestPath}" id = "requestPath"/>
+                                    <input type="hidden" th:value="${productTypePageInfo.pageNum}" id = "currentPage"/>
+                                    <input type="hidden" th:value="${productTypePageInfo.pages}" id = "totalPages"/>
                                     <div id="paginator"></div>
                                 </td>
                             </tr>
@@ -83,37 +86,10 @@
 
 <!-- bootstrap-paginator -->
 <script src="/js/bootstrap-paginator.min.js"></script>
+<script src="/js/paginator-own.js"></script>
 <!-- layerDate plugin javascript -->
 <script src="/js/plugins/My97DatePicker/WdatePicker.js"></script>
 <!-- 自定义js -->
 <script src="/js/content.js?v=1.0.0"></script>
-<script type='text/javascript'>
-    var params = "";
-    /*<![CDATA[*/
-    $().ready(function () {
-        $("#selectDiv [selectValue='true']").each(function(){
-            if($(this).val().trim() != ''){
-                params += $(this).attr('id') + "=" + $(this).val().trim() + "&";
-            }
-        });
-        var data = "a";
-        var options = {
-            currentPage: 1,
-            totalPages: 9,
-            numberOfPages: 5,
-            pageUrl: function(type, page, current){
-                console.log(params);
-                if (page==current) {
-                    return "javascript:void(0)";
-                } else {
-                    return "/productType/findProductTypePage?pageNum=" + page;
-                }
-            }
-        }
-
-        $('#paginator').bootstrapPaginator(options);
-    });
-    /*]]>*/
-</script>
 </body>
 </html>

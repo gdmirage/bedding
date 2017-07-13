@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: Blade
@@ -18,18 +21,26 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/productType")
-public class ProductTypeController {
+public class ProductTypeController extends BaseController{
     @Resource(name = "productTypeService")
     private ProductTypeService productTypeService;
 
     private final String VIEW_PATH = "/html/productType/";
 
     @RequestMapping(value = "/findProductTypePage")
-    public ModelAndView findProductTypePage(@RequestParam(value = "pageSize", defaultValue = "1") Integer pageSize,
-                                            @RequestParam(value = "pageNum", defaultValue = Constant.PAGE_NUM) Integer pageNum) {
+    public ModelAndView findProductTypePage(@RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize,
+                                            @RequestParam(value = "pageNum", defaultValue = Constant.PAGE_NUM) Integer pageNum,
+                                            HttpServletRequest request) {
         PageInfo<ProductType> productTypePageInfo = productTypeService.findProductTypePage(null, pageSize, pageNum);
+
+        // 返回给页面的所有参数
+        returnMap = new HashMap<String, Object>();
+        returnMap = setPaginatorParams(request);
+
+        returnMap.put("productTypePageInfo", productTypePageInfo);
+
         ModelAndView mv = new ModelAndView();
-        mv.addObject("productTypePageInfo", productTypePageInfo);
+        mv.addAllObjects(returnMap);
         mv.setViewName(VIEW_PATH + "product_type_list");
         return mv;
     }
