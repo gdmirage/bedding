@@ -25,7 +25,7 @@ public class ProductTypeController {
     private final String VIEW_PATH = "/html/productType/";
 
     @RequestMapping(value = "/findProductTypePage")
-    public ModelAndView findProductTypePage(@RequestParam(value = "pageSize", defaultValue = Constant.PAGE_SIZE) Integer pageSize,
+    public ModelAndView findProductTypePage(@RequestParam(value = "pageSize", defaultValue = "1") Integer pageSize,
                                             @RequestParam(value = "pageNum", defaultValue = Constant.PAGE_NUM) Integer pageNum) {
         PageInfo<ProductType> productTypePageInfo = productTypeService.findProductTypePage(null, pageSize, pageNum);
         ModelAndView mv = new ModelAndView();

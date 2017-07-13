@@ -1,30 +1,119 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <title>商品分类</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet"/>
+    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet"/>
+
+    <!-- Data Tables -->
+    <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
+
+    <link href="/css/animate.css" rel="stylesheet"/>
+    <link href="/css/style.css?v=4.1.0" rel="stylesheet"/>
+    <link href="/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
 </head>
-<body>
-    product_type_list
-    <br/>
-    ============
-    <br/>
-    <th:value>${productTypePageInfo.pageNum}</th:value>
-    <br/>
-    ============
-    <br/>
-    <p th:text="${productTypePageInfo}">222</p>
-    <br/>
-    ============
-    <br/>
-    <input value="123456" th:value="${productTypePageInfo}"/>
-    <a href="#" th:text="${productTypePageInfo}">ss</a>
-    <br/>
-    ============
-    <br/>
-    <div th:each="productType:${productTypePageInfo.list}">
-        <div th:text="${productType.typeName}"></div>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>商品分类</h5>
+                </div>
+                <div class="row" id="selectDiv">
+                    <div class="col-md-6">
+                        <span>名称：</span><input id="typeName" value="12" selectValue="true" th:value="${productTypePageInfo}"/>
+                        <span>是否有效：</span><input class="Wdate" id="d15" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <span>名称：</span>
+                        <select selectValue="true" id="isUse">
+                            <option th:value="${productTypePageInfo}" />
+                            <option th:value="${productTypePageInfo.total}" selected="selected"/>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>图片地址</th>
+                            <th>父ID</th>
+                            <th>级别</th>
+                            <th>是否有效</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="productType:${productTypePageInfo.list}">
+                        <tr class="gradeX">
+                            <td th:text="${productType.typeName}">Trident</td>
+                            <td th:text="${productType.picPath}">Internet Explorer 4.0</td>
+                            <td th:text="${productType.parentId}">Win 95+</td>
+                            <td th:text="${productType.nodeLevel}">4</td>
+                            <td th:text="${productType.isUse eq 'Y'} ? '有效' : '无效'">X</td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <div id="paginator"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-11111
+</div>
+
+<!-- 全局js -->
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+
+
+<!-- bootstrap-paginator -->
+<script src="/js/bootstrap-paginator.min.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<!-- 自定义js -->
+<script src="/js/content.js?v=1.0.0"></script>
+<script type='text/javascript'>
+    var params = "";
+    /*<![CDATA[*/
+    $().ready(function () {
+        $("#selectDiv [selectValue='true']").each(function(){
+            if($(this).val().trim() != ''){
+                params += $(this).attr('id') + "=" + $(this).val().trim() + "&";
+            }
+        });
+        var data = "a";
+        var options = {
+            currentPage: 1,
+            totalPages: 9,
+            numberOfPages: 5,
+            pageUrl: function(type, page, current){
+                console.log(params);
+                if (page==current) {
+                    return "javascript:void(0)";
+                } else {
+                    return "/productType/findProductTypePage?pageNum=" + page;
+                }
+            }
+        }
+
+        $('#paginator').bootstrapPaginator(options);
+    });
+    /*]]>*/
+</script>
 </body>
 </html>
