@@ -6,6 +6,8 @@ import com.annie.dto.ResultDto;
 import com.annie.entity.ProductType;
 import com.annie.service.ProductTypeService;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,6 +48,7 @@ public class ProductTypeController extends BaseController{
         ModelAndView mv = new ModelAndView();
         mv.addAllObjects(returnMap);
         mv.setViewName(VIEW_PATH + "product_type_list");
+        logger.info("===========lllll");
         return mv;
     }
 

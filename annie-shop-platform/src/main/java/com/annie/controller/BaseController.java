@@ -1,5 +1,8 @@
 package com.annie.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +15,8 @@ import java.util.Map;
 public class BaseController {
 
     public Map<String, Object> returnMap;
+
+    public Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 设置分页参数返回给页面
