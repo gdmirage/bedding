@@ -31,6 +31,11 @@ public class ProductTypeServiceImpl implements ProductTypeService{
         return productTypePageInfo;
     }
 
+    public List<ProductType> findAllProductTypeList(){
+        List<ProductType> productTypesList = productTypeMapper.selectProductTypeList();
+        return productTypesList;
+    }
+
     @Override
     public int createProductType(ProductType productType) {
         productType.setCreateDate(new Date());
@@ -55,4 +60,5 @@ public class ProductTypeServiceImpl implements ProductTypeService{
         productType.setIsDelete("Y");
         return productTypeMapper.updateProductType(productType);
     }
+
 }

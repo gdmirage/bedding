@@ -96,7 +96,7 @@ img {
     max-width: none;
 }
 
-button, input, select, textarea {
+/*button, input, select, textarea {
     margin: 0;
     font-size: 100%;
     vertical-align: middle;
@@ -105,7 +105,7 @@ button, input, select, textarea {
 button, input {
     *overflow: visible;
     line-height: normal;
-}
+}*/
 
 button::-moz-focus-inner, input::-moz-focus-inner {
     padding: 0;
@@ -1294,7 +1294,7 @@ legend small {
     color: #999999;
 }
 
-label, input, button, select, textarea {
+/*label, input, button, select, textarea {
     font-size: 14px;
     font-weight: normal;
     line-height: 20px;
@@ -1302,14 +1302,14 @@ label, input, button, select, textarea {
 
 input, button, select, textarea {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+}*/
 
 label {
     display: block;
     margin-bottom: 5px;
 }
 
-select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+/*select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     display: inline-block;
     height: 20px;
     padding: 4px 6px;
@@ -1321,9 +1321,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     -moz-border-radius: 4px;
     border-radius: 4px;
     vertical-align: middle;
-}
+}*/
 
-input, textarea, .uneditable-input {
+/*input, textarea, .uneditable-input {
     width: 206px;
 }
 
@@ -1350,7 +1350,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(82, 168, 236, .6);
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(82, 168, 236, .6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(82, 168, 236, .6);
-}
+}*/
 
 input[type="radio"], input[type="checkbox"] {
     margin: 4px 0 0;
@@ -1359,7 +1359,7 @@ input[type="radio"], input[type="checkbox"] {
     line-height: normal;
 }
 
-input[type="file"], input[type="image"], input[type="submit"], input[type="reset"], input[type="button"], input[type="radio"], input[type="checkbox"] {
+/*input[type="file"], input[type="image"], input[type="submit"], input[type="reset"], input[type="button"], input[type="radio"], input[type="checkbox"] {
     width: auto;
 }
 
@@ -1367,10 +1367,10 @@ select, input[type="file"] {
     height: 30px;
     *margin-top: 4px;
     line-height: 30px;
-}
+}*/
 
 select {
-    width: 220px;
+    width: 168px;
     border: 1px solid #cccccc;
     background-color: #ffffff;
 }
@@ -1379,7 +1379,7 @@ select[multiple], select[size] {
     height: auto;
 }
 
-select:focus, input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {
+/*select:focus, input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {
     outline: thin dotted #333;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
@@ -1403,7 +1403,7 @@ select:focus, input[type="file"]:focus, input[type="radio"]:focus, input[type="c
 .uneditable-textarea {
     width: auto;
     height: auto;
-}
+}*/
 
 input:-moz-placeholder, textarea:-moz-placeholder {
     color: #999999;
