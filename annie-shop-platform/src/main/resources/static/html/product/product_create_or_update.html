@@ -1,0 +1,70 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet"/>
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet"/>
+
+<link href="/css/animate.css" rel="stylesheet"/>
+<link href="/css/style.css?v=4.1.0" rel="stylesheet"/>
+    <body class="gray-bg">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>商品新增</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal" id = "productForm">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">商品名称：</label>
+                                    <div class="col-sm-9">
+                                        <input id="productName" type="text" name="productName" class="form-control" placeholder="请输入类型名称"/>
+                                        <span class="help-block m-b-none"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">所属分类：</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="productTypeId" id="productTypeId">
+                                            <option th:each="parentProductType:${productTypeList}" th:value="${parentProductType.id}" th:text="${parentProductType.typeName}"></option>
+                                        </select>
+                                        <span class="help-block m-b-none"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">图片：</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="uploadFile" id="productMainPic" class="form-control" accept="image/*"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">内容：</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                            <a class="btn btn-default">取消</a>
+                            <a id="addProductType" class="btn btn-info" onclick="createProduct()">新增</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 全局js -->
+        <script src="/js/jquery.min.js?v=2.1.4"></script>
+        <script src="/js/jquery.form.js?v=2.1.4"></script>
+        <script src="/js/bootstrap.min.js?v=3.3.6"></script>
+
+        <!-- Sweet alert -->
+        <script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
+        <!-- bootstrap-paginator -->
+        <script src="/js/bootstrap-paginator.min.js"></script>
+        <!-- layerDate plugin javascript -->
+        <script src="/js/plugins/My97DatePicker/WdatePicker.js"></script>
+        <!-- 自定义js -->
+        <script src="/js/content.js?v=1.0.0"></script>
+
+        <!-- 这个功能的js -->
+        <script src="/js/annie/product.js?v=1.0.0"></script>
+    </body>
+</html>

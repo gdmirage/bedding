@@ -35,9 +35,9 @@
                     <div class="col-md-6">
                         <span>名称：</span>
                         <input id="typeName" selectValue="true" />
-                        <span>是否有效：</span>
+                        <span>创建时间：</span>
                         <input selectValue="true" class="Wdate" id="d15" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
-                        <span>名称：</span>
+                        <span>是否有效：</span>
                         <select selectValue="true" id="isUse">
                             <option th:value="${productTypePageInfo.pageSize}" th:text="${productTypePageInfo.pageSize}"></option>
                             <option th:value="${productTypePageInfo.total}" selected="selected" th:text="${productTypePageInfo.total}"></option>

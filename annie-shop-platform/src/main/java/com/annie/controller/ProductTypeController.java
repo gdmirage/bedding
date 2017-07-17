@@ -48,7 +48,6 @@ public class ProductTypeController extends BaseController{
         ModelAndView mv = new ModelAndView();
         mv.addAllObjects(returnMap);
         mv.setViewName(VIEW_PATH + "product_type_list");
-        logger.info("===========lllll");
         return mv;
     }
 
@@ -60,10 +59,12 @@ public class ProductTypeController extends BaseController{
             productType = productTypeService.findProductTypeById(productTypeId);
         }
         List<ProductType> productTypeList = productTypeService.findAllProductTypeList();
+        // 返回给页面的所有参数
+        returnMap = new HashMap<String, Object>();
         returnMap.put("productTypeList", productTypeList);
         returnMap.put("productType",productType);
         mv.addAllObjects(returnMap);
-        mv.setViewName(VIEW_PATH + "product_type_add_or_update");
+        mv.setViewName(VIEW_PATH + "product_type_create_or_update");
         return mv;
     }
 
