@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">内容：</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control"></textarea>
+                                        <script id="editor" name="productContent" type="text/plain"></script>
                                     </div>
                                     <img src="/1500357974373.gif" width="50px" height="50px"/>
                                 </div>
@@ -60,12 +60,24 @@
         <script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
         <!-- bootstrap-paginator -->
         <script src="/js/bootstrap-paginator.min.js"></script>
-        <!-- layerDate plugin javascript -->
+        <!-- WdatePicker -->
         <script src="/js/plugins/My97DatePicker/WdatePicker.js"></script>
+
+        <!-- ueditor -->
+        <script type="text/javascript" charset="utf-8" src="/js/plugins/ueditor/ueditor.config.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/plugins/ueditor/ueditor.all.min.js"> </script>
+        <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+        <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+        <script type="text/javascript" charset="utf-8" src="/js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+
         <!-- 自定义js -->
         <script src="/js/content.js?v=1.0.0"></script>
 
         <!-- 这个功能的js -->
         <script src="/js/annie/product.js?v=1.0.0"></script>
+
+        <script type="text/javascript">
+            UE.getEditor('editor');
+        </script>
     </body>
 </html>

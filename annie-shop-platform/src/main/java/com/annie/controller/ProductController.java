@@ -5,6 +5,7 @@ import com.annie.constant.Constant;
 import com.annie.entity.ProductType;
 import com.annie.service.ProductTypeService;
 import com.annie.utils.FileUtil;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,7 @@ public class ProductController extends BaseController {
 
     @RequestMapping(value = "/createProduct")
     public void createProduct(@RequestParam MultipartFile uploadFile) {
+        logger.info("进来了");
         if (!uploadFile.isEmpty()) {
             try {
                 FileUtil.uploadFile(annieProperties.getFilePath()+ Constant.IMG_FILE_PATH, uploadFile);
