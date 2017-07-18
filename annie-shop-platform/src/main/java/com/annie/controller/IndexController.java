@@ -1,10 +1,12 @@
 package com.annie.controller;
 
+import com.annie.config.AnnieProperties;
+import com.annie.constant.Constant;
+import com.annie.utils.FileUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -19,6 +21,9 @@ import java.util.Map;
 @RequestMapping("/")
 public class IndexController {
 
+    @Autowired
+    private AnnieProperties annieProperties;
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView toIndex(Map<String,Object> map) {
         map.put("hello", "modelAndView");
@@ -27,4 +32,16 @@ public class IndexController {
         mv.addAllObjects(map);
         return mv;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<?> getFile(@PathVariable String filename) {
+        try {
+            return ResponseEntity.ok(FileUtil.getFileResource(annieProperties.getFilePath()+ Constant.IMG_FILE_PATH, filename));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }

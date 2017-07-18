@@ -8,4 +8,6 @@ package com.annie.constant;
 public interface Constant {
     public final String PAGE_SIZE = "10";
     public final String PAGE_NUM = "1";
+
+    public final String IMG_FILE_PATH = "img/";
 }

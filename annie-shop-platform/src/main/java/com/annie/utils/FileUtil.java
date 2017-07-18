@@ -2,6 +2,9 @@ package com.annie.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -18,6 +21,17 @@ import java.util.Date;
 public class FileUtil {
 
     private static Logger logger = LoggerFactory.getLogger(FileUtil.class);
+
+    // URL位置资源 前缀
+    private static final String FILE_LOCATION = "file:";
+
+    //　ClassPath位置资源　前缀
+    private static final String CLASSPATH_LOCATION = "classpath:";
+
+    // 相对路径资源 前缀
+    private static final String WEB_INF_LOCATION = "WEB-INF:";
+
+    private static final ResourceLoader resourceLoader = new DefaultResourceLoader();
 
     /**
      * 创建文件夹
@@ -89,6 +103,17 @@ public class FileUtil {
             logger.info("文件："+fileName+" 的后缀是："+suffix);
         }
         return suffix;
+    }
+
+    /**
+     * 获取文件资源
+     * @param location
+     * @param fileName
+     * @return
+     */
+    public static Resource getFileResource(String location, String fileName){
+        Resource resource = resourceLoader.getResource(FILE_LOCATION + Paths.get(location, fileName).toString());
+        return resource;
     }
 
     public static void main(String args[]){

@@ -1,12 +1,13 @@
 package com.annie.controller;
 
+import com.annie.config.AnnieProperties;
+import com.annie.constant.Constant;
 import com.annie.entity.ProductType;
 import com.annie.service.ProductTypeService;
 import com.annie.utils.FileUtil;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,21 +23,17 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/product")
-public class ProductController extends BaseController{
+public class ProductController extends BaseController {
 
     @Resource(name = "productTypeService")
     private ProductTypeService productTypeService;
-
+    @Autowired
+    private AnnieProperties annieProperties;
     private final String VIEW_PATH = "/html/product/";
-    private static String ROOT = "D:/bootTestUpload/";
-    private final ResourceLoader resourceLoader;
 
-    public ProductController(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
 
     @RequestMapping(value = "/toCreateOrUpdateProduct")
-    public ModelAndView toCreateOrUpdateProductType(){
+    public ModelAndView toCreateOrUpdateProductType() {
         ModelAndView mv = new ModelAndView();
         List<ProductType> productTypeList = productTypeService.findAllProductTypeList();
         // 返回给页面的所有参数
@@ -48,10 +45,10 @@ public class ProductController extends BaseController{
     }
 
     @RequestMapping(value = "/createProduct")
-    public void createProduct(@RequestParam MultipartFile uploadFile){
-        if(!uploadFile.isEmpty()){
+    public void createProduct(@RequestParam MultipartFile uploadFile) {
+        if (!uploadFile.isEmpty()) {
             try {
-                FileUtil.uploadFile(ROOT, uploadFile);
+                FileUtil.uploadFile(annieProperties.getFilePath()+ Constant.IMG_FILE_PATH, uploadFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
