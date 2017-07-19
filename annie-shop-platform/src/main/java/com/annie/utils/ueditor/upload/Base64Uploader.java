@@ -1,48 +1,52 @@
 package com.annie.utils.ueditor.upload;
 
 import com.annie.utils.ueditor.PathFormat;
+import com.annie.utils.ueditor.define.AppInfo;
 import com.annie.utils.ueditor.define.BaseState;
 import com.annie.utils.ueditor.define.FileType;
 import com.annie.utils.ueditor.define.State;
+
 import java.util.Map;
+
 import org.apache.commons.codec.binary.Base64;
 
-public final class Base64Uploader
-{
-    public static State save(String content, Map<String, Object> conf)
-    {
-        byte[] data = decode(content);
+public final class Base64Uploader {
 
-        long maxSize = ((Long)conf.get("maxSize")).longValue();
+	public static State save(String content, Map<String, Object> conf) {
+		
+		byte[] data = decode(content);
 
-        if (!validSize(data, maxSize)) {
-            return new BaseState(false, 1);
-        }
+		long maxSize = ((Long) conf.get("maxSize")).longValue();
 
-        String suffix = FileType.getSuffix("JPG");
+		if (!validSize(data, maxSize)) {
+			return new BaseState(false, AppInfo.MAX_SIZE);
+		}
 
-        String savePath = PathFormat.parse((String)conf.get("savePath"),
-                (String)conf.get("filename"));
+		String suffix = FileType.getSuffix("JPG");
 
-        savePath = savePath + suffix;
-        String physicalPath = (String)conf.get("rootPath") + savePath;
+		String savePath = PathFormat.parse((String) conf.get("savePath"),
+				(String) conf.get("filename"));
+		
+		savePath = savePath + suffix;
+		String physicalPath = (String) conf.get("rootPath") + savePath;
 
-        State storageState = StorageManager.saveBinaryFile(data, physicalPath);
+		State storageState = StorageManager.saveBinaryFile(data, physicalPath);
 
-        if (storageState.isSuccess()) {
-            storageState.putInfo("url", PathFormat.format(savePath));
-            storageState.putInfo("type", suffix);
-            storageState.putInfo("original", "");
-        }
+		if (storageState.isSuccess()) {
+			storageState.putInfo("url", PathFormat.format(savePath));
+			storageState.putInfo("type", suffix);
+			storageState.putInfo("original", "");
+		}
 
-        return storageState;
-    }
+		return storageState;
+	}
 
-    private static byte[] decode(String content) {
-        return Base64.decodeBase64(content);
-    }
+	private static byte[] decode(String content) {
+		return Base64.decodeBase64(content);
+	}
 
-    private static boolean validSize(byte[] data, long length) {
-        return data.length <= length;
-    }
+	private static boolean validSize(byte[] data, long length) {
+		return data.length <= length;
+	}
+	
 }
