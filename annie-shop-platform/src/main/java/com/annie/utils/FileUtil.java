@@ -60,7 +60,7 @@ public class FileUtil {
     }
 
     /**
-     * 上传文件
+     * 通过spring 网页上传文件
      * @param path
      * @param file
      * @return
@@ -116,8 +116,4 @@ public class FileUtil {
         return resource;
     }
 
-    public static void main(String args[]){
-        String fileName = "123456";
-        System.out.println(suffix(fileName));
-    }
 }

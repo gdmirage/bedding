@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Map;
  * @Description:
  * @Date: 下午 16:46 2017/7/13 0013
  */
-public class BaseController {
+public class BaseController{
 
     public Map<String, Object> returnMap;
 

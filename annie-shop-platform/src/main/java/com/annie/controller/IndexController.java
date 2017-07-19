@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,7 +32,7 @@ public class IndexController extends BaseController {
     @Autowired
     private AnnieProperties annieProperties;
 
-    private static final String UEDITOR_CONFIG_JSON_PATH = "/js/plugins/ueditor/jsp/config.json";
+    private static final String UEDITOR_CONFIG_JSON_PATH = "/static/js/plugins/ueditor/jsp/";
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView toIndex(Map<String, Object> map) {
@@ -58,32 +59,32 @@ public class IndexController extends BaseController {
         try {
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");
-            String rootPath = request.getContextPath() + "/";
+            String rootPath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
             logger.info("rootPath===" + rootPath);
             String action = request.getParameter("action");
             if ("catchimage".equals(action)) {
                 return "";
             }
-            String res = new ActionEnter(request, rootPath).exec();
+            String res = new ActionEnter(request, rootPath + UEDITOR_CONFIG_JSON_PATH).exec();
             logger.info("res====" + res);
             return res;
         } catch (JSONException e) {
             logger.error("", e);
-        } catch (UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
             logger.error("", e);
         }
         return "";
     }
 
-    @RequestMapping(value = "/uploadimage")
-    public void uploadimage(@RequestParam MultipartFile upfile) {
-        logger.info("进来了");
-        if (!upfile.isEmpty()) {
-            try {
-                FileUtil.uploadFile(annieProperties.getFilePath()+ Constant.IMG_FILE_PATH, upfile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    @RequestMapping(value = "/uploadimage")
+//    public void uploadimage(@RequestParam MultipartFile upfile) {
+//        logger.info("进来了");
+//        if (!upfile.isEmpty()) {
+//            try {
+//                FileUtil.uploadFile(annieProperties.getFilePath() + Constant.IMG_FILE_PATH, upfile);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }
