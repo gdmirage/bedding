@@ -13,7 +13,7 @@
                             <h5>商品新增</h5>
                         </div>
                         <div class="ibox-content">
-                            <form class="form-horizontal" id = "productForm">
+                            <form class="form-horizontal" id = "productForm" method="post">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">商品名称：</label>
                                     <div class="col-sm-9">
@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">内容：</label>
                                     <div class="col-sm-9">
-                                        <script id="editor" name="productContent" type="text/plain"></script>
+                                        <script id="productEditor" name="productContent" type="text/plain"></script>
                                     </div>
                                 </div>
                             </form>
@@ -76,7 +76,7 @@
         <script src="/js/annie/product.js?v=1.0.0"></script>
 
         <script type="text/javascript">
-            UE.getEditor('editor');
+            var productEditor = UE.getEditor('productEditor');
         </script>
     </body>
 </html>

@@ -46,8 +46,10 @@ public class ProductController extends BaseController {
     }
 
     @RequestMapping(value = "/createProduct")
-    public void createProduct(@RequestParam MultipartFile uploadFile) {
+    public void createProduct(@RequestParam MultipartFile uploadFile, String productContent,  String productName) {
         logger.info("进来了");
+        logger.info("productContent==="+productContent);
+        logger.info("productName==="+productName);
         if (!uploadFile.isEmpty()) {
             try {
                 FileUtil.uploadFile(annieProperties.getFilePath()+ Constant.IMG_FILE_PATH, uploadFile);
