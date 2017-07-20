@@ -27,7 +27,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/productType")
-public class ProductTypeController extends BaseController{
+public class ProductTypeController extends BaseController {
     @Resource(name = "productTypeService")
     private ProductTypeService productTypeService;
 
@@ -52,43 +52,81 @@ public class ProductTypeController extends BaseController{
     }
 
     @RequestMapping(value = "/toCreateOrUpdateProductType")
-    public ModelAndView toCreateOrUpdateProductType(@RequestParam Integer productTypeId){
+    public ModelAndView toCreateOrUpdateProductType(Long productTypeId) {
         ModelAndView mv = new ModelAndView();
         ProductType productType = new ProductType();
-        if(null != productTypeId){
+        if (null != productTypeId) {
             productType = productTypeService.findProductTypeById(productTypeId);
         }
         List<ProductType> productTypeList = productTypeService.findAllProductTypeList();
         // 返回给页面的所有参数
         returnMap = new HashMap<String, Object>();
         returnMap.put("productTypeList", productTypeList);
-        returnMap.put("productType",productType);
+        returnMap.put("productType", productType);
         mv.addAllObjects(returnMap);
         mv.setViewName(VIEW_PATH + "product_type_create_or_update");
         return mv;
     }
 
     @RequestMapping(value = "/createProductType")
-    public void createProductType(@RequestParam("typeName") String typeName,
-                                  @RequestParam("parentId") Integer parentId,
-                                  @RequestParam("isUse") String isUse,
-                                  @RequestParam("picPath") String picPath) {
-        ProductType productType = new ProductType();
-        productType.setTypeName(typeName);
-        productType.setParentId(parentId);
-        productType.setIsUse(isUse);
-        productType.setPicPath(picPath);
-        productType.setCreateMan(1);
-        productTypeService.createProductType(productType);
+    public ResultDto createProductType(String typeName,
+                                       Integer parentId,
+                                       String isUse) {
+        ResultDto result = new ResultDto();
+        try {
+            ProductType productType = new ProductType();
+            productType.setTypeName(typeName);
+            productType.setParentId(parentId);
+            productType.setIsUse(isUse);
+            productType.setCreateMan(1);
+            productTypeService.createProductType(productType);
+
+            result.setResultCode(ResultCodeConstant.SUCCESS_CODE);
+            result.setResultMsg(ResultCodeConstant.SUCCESS_MSG);
+        } catch (Exception e) {
+            result.setResultCode(ResultCodeConstant.EXCEPTION_CODE);
+            result.setResultMsg(ResultCodeConstant.EXCEPTION_MSG);
+            logger.error("ProductTypeController----createProductType  fail", e);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/updateProductType")
+    public ResultDto updateProductType(Long productTypeId,
+                                       String typeName,
+                                       Integer parentId,
+                                       String isUse) {
+        ResultDto result = new ResultDto();
+        try {
+            ProductType productType = productTypeService.findProductTypeById(productTypeId);
+            productType.setTypeName(typeName);
+            productType.setParentId(parentId);
+            productType.setIsUse(isUse);
+            productType.setCreateMan(1);
+            productTypeService.updateProductType(productType);
+
+            result.setResultCode(ResultCodeConstant.SUCCESS_CODE);
+            result.setResultMsg(ResultCodeConstant.SUCCESS_MSG);
+        } catch (Exception e) {
+            result.setResultCode(ResultCodeConstant.EXCEPTION_CODE);
+            result.setResultMsg(ResultCodeConstant.EXCEPTION_MSG);
+            logger.error("ProductTypeController----createProductType  fail", e);
+        }
+        return result;
     }
 
     @RequestMapping(value = "/deleteProductType")
-    @ResponseBody
-    public ResultDto deleteProductType(@RequestParam Integer productTypeId){
-        ResultDto resultDto = new ResultDto();
-        productTypeService.deleteProductType(productTypeId);
-        resultDto.setResultCode(ResultCodeConstant.SUCCESS_CODE);
-        resultDto.setResultMsg(ResultCodeConstant.SUCCESS_MSG);
-        return resultDto;
+    public ResultDto deleteProductType(@RequestParam Integer productTypeId) {
+        ResultDto result = new ResultDto();
+        try {
+            productTypeService.deleteProductType(productTypeId);
+            result.setResultCode(ResultCodeConstant.SUCCESS_CODE);
+            result.setResultMsg(ResultCodeConstant.SUCCESS_MSG);
+        } catch (Exception e) {
+            result.setResultCode(ResultCodeConstant.EXCEPTION_CODE);
+            result.setResultMsg(ResultCodeConstant.EXCEPTION_MSG);
+            logger.error("ProductTypeController----deleteProductType fail", e);
+        }
+        return result;
     }
 }

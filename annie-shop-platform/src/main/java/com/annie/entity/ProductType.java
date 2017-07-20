@@ -3,7 +3,7 @@ package com.annie.entity;
 import java.util.Date;
 
 public class ProductType {
-    private Integer id;
+    private Long id;
 
     private String typeName;
 
@@ -25,11 +25,11 @@ public class ProductType {
 
     private Date modifyDate;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -25,6 +25,16 @@
     <sql id="Blob_Column_List">
         PRODUCT_CONTENT
     </sql>
+
+    <select id="selectProductList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from product
+        where IS_DELETE = 'N'
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -33,7 +43,7 @@
         from product
         where PRODUCT_ID = #{productId,jdbcType=BIGINT}
     </select>
-    <insert id="insertSelective" parameterType="com.annie.entity.Product">
+    <insert id="insertProduct" parameterType="com.annie.entity.Product">
         insert into product
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="productId != null">
@@ -118,7 +128,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.annie.entity.Product">
+    <update id="updateProduct" parameterType="com.annie.entity.Product">
         update product
         <set>
             <if test="productName != null">

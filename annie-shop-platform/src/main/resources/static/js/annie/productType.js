@@ -19,6 +19,21 @@ function toCreateOrUpdateProductType(productTypeId) {
     });
 }
 
+function createProductType() {
+    var url = "/productType/createProductType";
+    formSubmit("productTypeForm", url, closeModal);
+}
+
+function closeModal() {
+    $("#closeModal").click();
+    window.location.reload(true);
+}
+
+function updateProductType() {
+    var url = "/productType/updateProductType";
+    formSubmit("productTypeForm", url, closeModal);
+}
+
 function deleteProductType(productTypeId) {
     swal({
         title: "您确定要删除这条信息吗",
@@ -40,7 +55,6 @@ function deleteProductType(productTypeId) {
             global : true,
             data : params, // 要传递的数据
             success : function(data) {
-                console.log(data.resultCode);
                 var resultCode = data.resultCode;
                 if(resultCode == '0000'){
                     swal("删除成功！", "您已经永久删除了这条信息。", "success");

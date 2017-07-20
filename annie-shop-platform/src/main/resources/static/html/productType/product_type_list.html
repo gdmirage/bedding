@@ -39,8 +39,9 @@
                         <input selectValue="true" class="Wdate" id="d15" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                         <span>是否有效：</span>
                         <select selectValue="true" id="isUse">
-                            <option th:value="${productTypePageInfo.pageSize}" th:text="${productTypePageInfo.pageSize}"></option>
-                            <option th:value="${productTypePageInfo.total}" selected="selected" th:text="${productTypePageInfo.total}"></option>
+                            <option value="">请选择</option>
+                            <option value="Y">有效</option>
+                            <option value="N">无效</option>
                         </select>
                         <a class="btn btn-info">查找</a>
                         <a id="addProductType" class="btn btn-info" data-toggle="modal" data-target="#ProductTypeModal" onclick="toCreateOrUpdateProductType(null)">新增</a>
@@ -90,8 +91,9 @@
 </div>
 <div class="modal inmodal" id="ProductTypeModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!-- 全局js -->
-<script src="/js/jquery.min.js?v=2.1.4"></script>
-<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.form.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 <!-- Sweet alert -->
 <script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
@@ -101,10 +103,18 @@
 <script src="/js/paginator-own.js"></script>
 <!-- layerDate plugin javascript -->
 <script src="/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<!-- 公共js -->
+<script src="/js/public.js"></script>
 <!-- 自定义js -->
-<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/content.js"></script>
 
 <!-- 这个功能的js -->
-<script src="/js/annie/productType.js?v=1.0.0"></script>
+<script src="/js/annie/productType.js"></script>
+<script>
+//    function complete() {
+//        alert(1);
+//    }
+//    swal("this is my test","","success",complete);
+</script>
 </body>
 </html>

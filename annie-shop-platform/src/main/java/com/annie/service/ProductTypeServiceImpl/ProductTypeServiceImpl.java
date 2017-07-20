@@ -50,12 +50,12 @@ public class ProductTypeServiceImpl implements ProductTypeService{
     }
 
     @Override
-    public ProductType findProductTypeById(int productTypeId) {
+    public ProductType findProductTypeById(long productTypeId) {
         return productTypeMapper.selectByPrimaryKey(productTypeId);
     }
 
     @Override
-    public int deleteProductType(int productTypeId) {
+    public int deleteProductType(long productTypeId) {
         ProductType productType = productTypeMapper.selectByPrimaryKey(productTypeId);
         productType.setIsDelete("Y");
         return productTypeMapper.updateProductType(productType);

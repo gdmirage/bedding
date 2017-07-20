@@ -21,7 +21,7 @@ CREATE TABLE `product_type` (
   `TYPE_NAME` varchar(20) collate utf8_bin default NULL COMMENT '类型名称',
   `PIC_PATH` varchar(200) collate utf8_bin default NULL COMMENT '图片地址',
   `PARENT_ID` int(11) default NULL COMMENT '父ID',
-  `LEVEL` int(11) default NULL COMMENT '级别',
+  `NODE_LEVEL` int(11) default NULL COMMENT '级别',
   `IS_USE` char(1) collate utf8_bin default NULL COMMENT '是否有效',
   `IS_DELETE` char(1) collate utf8_bin default NULL COMMENT '是否删除',
   `CREATE_MAN` int(11) default NULL COMMENT '创建人',

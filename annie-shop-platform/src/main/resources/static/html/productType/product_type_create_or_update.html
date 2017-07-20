@@ -6,44 +6,44 @@
                 </button>
                 <h4 class="modal-title">新增</h4>
             </div>
-            <div class="modal-body">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">名称：</label>
-                        <div class="col-sm-9">
-                            <input id="typeName" type="text" name="" class="form-control" placeholder="请输入类型名称"/>
-                            <span class="help-block m-b-none"></span>
+            <form id="productTypeForm" method="post">
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="hidden" name="productTypeId" th:value="${productType.id}"/>
+                            <label class="col-sm-3 control-label">名称：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="typeName" class="form-control" th:value="${productType.typeName}" placeholder="请输入类型名称"/>
+                                <span class="help-block m-b-none"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">父级菜单：</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="" >
-                                <option th:each="parentProductType:${productTypeList}" th:value="${parentProductType.id}" th:text="${parentProductType.typeName}" th:selected="${parentProductType.id == 5}"></option>
-                            </select>
-                            <span class="help-block m-b-none"></span>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">父级菜单：</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="parentId" >
+                                    <option value="-1">无</option>
+                                    <option th:each="parentProductType:${productTypeList}" th:value="${parentProductType.id}"
+                                             th:text="${parentProductType.typeName}" th:selected="${parentProductType.id == productType.parentId}"></option>
+                                </select>
+                                <span class="help-block m-b-none"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">图片：</label>
-                        <div class="col-sm-9">
-                            <input type="file" name="" class="form-control" accept="image/*"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">是否有效：</label>
-                        <div class="col-sm-9">
-                            <label class="radio-inline">
-                                <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"/>有效</label>
-                            <label class="radio-inline">
-                                <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"/>无效</label>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否有效：</label>
+                            <div class="col-sm-9">
+                                <label class="radio-inline">
+                                    <input type="radio" checked="" value="Y" name="isUse" th:checked="${productType.isUse == 'Y'}"/>有效</label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="N" name="isUse" th:checked="${productType.isUse == 'N'}"/>无效</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button id="closeModal" type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="createProductType()" th:style="${productType.id eq null ? '' : 'display:none;'}">保存</button>
+                <button type="button" class="btn btn-primary" onclick="updateProductType()" th:style="${productType.id eq null ? 'display:none;' : ''}">修改</button>
             </div>
         </div>
     </div>

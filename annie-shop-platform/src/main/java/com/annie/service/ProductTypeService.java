@@ -25,7 +25,7 @@ public interface ProductTypeService {
 
     int updateProductType(ProductType productType);
 
-    ProductType findProductTypeById(int productTypeId);
+    ProductType findProductTypeById(long productTypeId);
 
-    int deleteProductType(int productTypeId);
+    int deleteProductType(long productTypeId);
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.annie.dao.ProductTypeMapper">
     <resultMap id="BaseResultMap" type="com.annie.entity.ProductType">
-        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <id column="ID" property="id" jdbcType="BIGINT"/>
         <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR"/>
         <result column="PIC_PATH" property="picPath" jdbcType="VARCHAR"/>
         <result column="PARENT_ID" property="parentId" jdbcType="INTEGER"/>
@@ -18,11 +18,11 @@
         ID, TYPE_NAME, PIC_PATH, PARENT_ID, NODE_LEVEL, IS_USE, IS_DELETE, CREATE_MAN, CREATE_DATE,
         MODIFY_MAN, MODIFY_DATE
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from product_type
-        where ID = #{id,jdbcType=INTEGER}
+        where ID = #{id,jdbcType=BIGINT}
     </select>
     <select id="selectProductTypeList" resultMap="BaseResultMap">
         select
@@ -69,7 +69,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id,jdbcType=INTEGER},
+                #{id,jdbcType=BIGINT},
             </if>
             <if test="typeName != null">
                 #{typeName,jdbcType=VARCHAR},
@@ -137,6 +137,6 @@
                 MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where ID = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

@@ -6,7 +6,11 @@ function createProduct() {
     var options = {
         url : url,
         dataType : "text/html",
-        success : function(status){
+        success : function(result){
+            var code = result.resultCode;
+            if(code == '0000'){
+
+            }
         },
         error:function(data){
 

@@ -29,7 +29,7 @@ public class DAOTest {
     public void create() {
         Product p = new Product();
         p.setProductName("abcde");
-        productMapper.insertSelective(p);
+        productMapper.insertProduct(p);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProductTypeMapper {
     int insertProductType(ProductType record);
 
-    ProductType selectByPrimaryKey(Integer id);
+    ProductType selectByPrimaryKey(Long id);
 
     int updateProductType(ProductType record);
 
