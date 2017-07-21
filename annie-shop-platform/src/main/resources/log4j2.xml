@@ -2,7 +2,7 @@
 <Configuration status="INFO" shutdownHook="disable">
 
     <Properties>
-        <Property name="logging.dir">F:/logs</Property>
+        <Property name="logging.dir">logs</Property>
     </Properties>
 
     <Appenders>
