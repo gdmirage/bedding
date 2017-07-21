@@ -3,18 +3,16 @@
  * @param formId
  * @param url
  */
-function formSubmit(formId, url, complete1) {
+function formSubmit(formId, url, complete) {
     var options = {
         url: url,
         dataType: "json",
         success: function (result) {
             var code = result.resultCode;
             if(code == '0000'){
-                console.log(complete1);
-                // successAlert("", complete);
-                var complete = complete1;
-                console.log(complete);
-                swal("操作成功！", msg, "success", complete);
+                complete();
+                /** 弄不了提示的。。所以只能刷新 **/
+                // swal("操作成功！", msg, "success", complete);
             }else{
                 var msg = result.resultMsg;
                 failAlert(msg);

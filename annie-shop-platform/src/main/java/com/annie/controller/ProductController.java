@@ -36,7 +36,7 @@ public class ProductController extends BaseController {
     private ProductService productService;
     @Autowired
     private AnnieProperties annieProperties;
-    private final String VIEW_PATH = "/html/product/";
+    private final String VIEW_PATH = "html/product/";
 
     @RequestMapping(value = "/findProductPage")
     public ModelAndView findProductPage(@RequestParam(value = "pageSize", defaultValue = Constant.PAGE_SIZE) Integer pageSize,

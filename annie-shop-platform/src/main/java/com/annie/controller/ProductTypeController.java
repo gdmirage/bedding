@@ -31,7 +31,7 @@ public class ProductTypeController extends BaseController {
     @Resource(name = "productTypeService")
     private ProductTypeService productTypeService;
 
-    private final String VIEW_PATH = "/html/productType/";
+    private final String VIEW_PATH = "html/productType/";
 
     @RequestMapping(value = "/findProductTypePage")
     public ModelAndView findProductTypePage(@RequestParam(value = "pageSize", defaultValue = Constant.PAGE_SIZE) Integer pageSize,

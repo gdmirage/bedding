@@ -38,7 +38,7 @@ public class IndexController extends BaseController {
     public ModelAndView toIndex(Map<String, Object> map) {
         map.put("hello", "modelAndView");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/html/index");
+        mv.setViewName("html/index");
         mv.addAllObjects(map);
         return mv;
     }

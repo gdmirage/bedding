@@ -52,9 +52,9 @@
                         <thead>
                         <tr>
                             <th>名称</th>
-                            <th>图片地址</th>
+                            <!--<th>图片地址</th>-->
                             <th>父ID</th>
-                            <th>级别</th>
+                            <!--<th>级别</th>-->
                             <th>是否有效</th>
                             <th>操作</th>
                         </tr>
@@ -62,9 +62,9 @@
                         <tbody th:each="productType:${productTypePageInfo.list}">
                         <tr class="gradeX">
                             <td th:text="${productType.typeName}"></td>
-                            <td th:text="${productType.picPath}"></td>
+                            <!--<td th:text="${productType.picPath}"></td>-->
                             <td th:text="${productType.parentId}"></td>
-                            <td th:text="${productType.nodeLevel}"></td>
+                            <!--<td th:text="${productType.nodeLevel}"></td>-->
                             <td th:text="${productType.isUse eq 'Y'} ? '有效' : '无效'"></td>
                             <td>
                                 <a class="btn btn-info" data-toggle="modal" data-target="#ProductTypeModal" th:onclick="'toCreateOrUpdateProductType('+${productType.id}+')'">修改</a>
