@@ -3,18 +3,23 @@ $().ready(function () {
 
 function createProduct() {
     var url = "/product/createProduct";
-    var options = {
-        url : url,
-        dataType : "text/html",
-        success : function(result){
-            var code = result.resultCode;
-            if(code == '0000'){
+    formSubmit("productForm", url, reload());
+}
 
-            }
-        },
-        error:function(data){
+function updateProduct() {
+    var url = "/product/updateProduct";
+    formSubmit("productForm", url, reload());
+}
 
-        }
+function reload() {
+    window.location.href = "/product/findProductPage"
+}
+
+function deleteProduct(productId) {
+    var url = "/product/deleteProduct";
+    var params = {
+        productId: productId
     };
-    $("#productForm").ajaxSubmit(options);
+
+    confirm(url, params, reload);
 }

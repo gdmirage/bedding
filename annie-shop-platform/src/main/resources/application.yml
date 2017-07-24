@@ -22,5 +22,12 @@ spring:
     password: jkj32_edrk22
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
+# spring 对静态资源管理
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
 logging:
   config: classpath:log4j2.xml

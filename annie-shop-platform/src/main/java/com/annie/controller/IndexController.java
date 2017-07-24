@@ -60,13 +60,13 @@ public class IndexController extends BaseController {
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");
             String rootPath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
-            logger.info("rootPath===" + rootPath);
+//            logger.info("rootPath===" + rootPath);
             String action = request.getParameter("action");
             if ("catchimage".equals(action)) {
                 return "";
             }
             String res = new ActionEnter(request, rootPath + UEDITOR_CONFIG_JSON_PATH).exec();
-            logger.info("res====" + res);
+//            logger.info("res====" + res);
             return res;
         } catch (JSONException e) {
             logger.error("", e);

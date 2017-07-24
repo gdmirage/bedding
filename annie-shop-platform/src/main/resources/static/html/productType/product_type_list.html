@@ -90,31 +90,10 @@
     </div>
 </div>
 <div class="modal inmodal" id="ProductTypeModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
-<!-- 全局js -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/jquery.form.js?v=2.1.4"></script>
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Sweet alert -->
-<script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
-<!-- bootstrap-paginator -->
-<script src="/js/bootstrap-paginator.min.js"></script>
+<div th:include="html/common :: quoteJses"></div>
 <!-- 封装的分页组件js -->
 <script src="/js/paginator-own.js"></script>
-<!-- layerDate plugin javascript -->
-<script src="/js/plugins/My97DatePicker/WdatePicker.js"></script>
-<!-- 公共js -->
-<script src="/js/public.js"></script>
-<!-- 自定义js -->
-<script src="/js/content.js"></script>
-
 <!-- 这个功能的js -->
-<script src="/js/annie/productType.js"></script>
-<script>
-//    function complete() {
-//        alert(1);
-//    }
-//    swal("this is my test","","success",complete);
-</script>
+<script th:src="${urls.getForLookupPath('/js/annie/productType.js') }"></script>
 </body>
 </html>

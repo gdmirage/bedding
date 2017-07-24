@@ -52,13 +52,14 @@
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody th:each="productType:${productPageInfo.list}">
+                        <tbody th:each="product:${productPageInfo.list}">
                         <tr class="gradeX">
+                            <td th:text="${product.productMainPic}"></td>
                             <td th:text="${product.productName}"></td>
                             <td th:text="${product.productUnit}"></td>
                             <td th:text="${product.productTypeId}"></td>
                             <td>
-                                <a class="btn btn-info J_menuItem" th:href="'toCreateOrUpdateProduct/'+${product.productId}">修改</a>
+                                <a class="btn btn-info J_menuItem" th:href="'toCreateOrUpdateProduct?productId='+${product.productId}">修改</a>
                                 <a class="btn btn-danger" th:onclick="'deleteProduct('+${product.productId}+')'">删除</a>
                             </td>
                         </tr>
@@ -80,24 +81,11 @@
         </div>
     </div>
 </div>
-<!-- 全局js -->
-<script src="/js/jquery.min.js?v=2.1.4"></script>
-<script src="/js/bootstrap.min.js?v=3.3.6"></script>
 
-<!-- Sweet alert -->
-<script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
-<!-- bootstrap-paginator -->
-<script src="/js/bootstrap-paginator.min.js"></script>
+<div th:include="html/common :: quoteJses"></div>
 <!-- 封装的分页组件js -->
 <script src="/js/paginator-own.js"></script>
-<!-- 公共js -->
-<script src="/js/public.js"></script>
-<!-- layerDate plugin javascript -->
-<script src="/js/plugins/My97DatePicker/WdatePicker.js"></script>
-<!-- 自定义js -->
-<script src="/js/content.js?v=1.0.0"></script>
-
 <!-- 这个功能的js -->
-<script src="/js/annie/productType.js?v=1.0.0"></script>
+<script th:src="${urls.getForLookupPath('/js/annie/product.js') }"></script>
 </body>
 </html>
