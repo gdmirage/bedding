@@ -1,12 +1,6 @@
 package com.annie.utils.ueditor;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,16 +33,19 @@ public final class ConfigManager {
 	private ConfigManager ( String rootPath, String contextPath, String uri ) throws FileNotFoundException, IOException {
 		
 		rootPath = rootPath.replace( "\\", "/" );
-		
+
 		this.rootPath = rootPath;
 		this.contextPath = contextPath;
-		
+
+//		System.out.println("manager======rootPath:"+rootPath);
+//		System.out.println("manager======contextPath:"+contextPath);
+
 		if ( contextPath.length() > 0 ) {
 			this.originalPath = this.rootPath + uri.substring( contextPath.length() );
 		} else {
 			this.originalPath = this.rootPath + uri;
 		}
-		
+//		System.out.println("manager======originalPath:"+originalPath);
 		this.initEnv();
 		
 	}
@@ -158,8 +155,8 @@ public final class ConfigManager {
 		}
 		
 		this.parentPath = file.getParent();
-		
-		String configContent = this.readFile( this.getConfigPath() );
+
+		String configContent = this.readFile(rootPath + configFileName);
 		
 		try{
 			JSONObject jsonConfig = new JSONObject( configContent );
@@ -192,8 +189,12 @@ public final class ConfigManager {
 		StringBuilder builder = new StringBuilder();
 		
 		try {
-			
-			InputStreamReader reader = new InputStreamReader( new FileInputStream( path ), "UTF-8" );
+
+			// spring boot 是jar包启动，所以需要在jar包内获取配置文件
+//			System.out.println("===="+path);
+			InputStream stream = getClass().getResourceAsStream(path);
+			InputStreamReader reader = new InputStreamReader( stream, "UTF-8" );
+//			InputStreamReader reader = new InputStreamReader( new FileInputStream( path ), "UTF-8" );
 			BufferedReader bfReader = new BufferedReader( reader );
 			
 			String tmpContent = null;

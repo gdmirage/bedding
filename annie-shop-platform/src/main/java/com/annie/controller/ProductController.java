@@ -98,7 +98,7 @@ public class ProductController extends BaseController {
             product.setProductContent(productContent);
             product.setProductUnit(productUnit);
             product.setProductMainPic(fileName);
-            productService.createProduct(product);
+            productService.updateProduct(product);
 
             result.setResultCode(ResultCodeConstant.SUCCESS_CODE);
             result.setResultMsg(ResultCodeConstant.SUCCESS_MSG);

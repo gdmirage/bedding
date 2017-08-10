@@ -15,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -59,18 +58,21 @@ public class IndexController extends BaseController {
         try {
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");
-            String rootPath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
+//            String rootPath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
 //            logger.info("rootPath===" + rootPath);
             String action = request.getParameter("action");
             if ("catchimage".equals(action)) {
                 return "";
             }
-            String res = new ActionEnter(request, rootPath + UEDITOR_CONFIG_JSON_PATH).exec();
+            InputStream stream = getClass().getResourceAsStream(UEDITOR_CONFIG_JSON_PATH);
+            String res = new ActionEnter(request, "" + UEDITOR_CONFIG_JSON_PATH).exec();
 //            logger.info("res====" + res);
-            return res;
+            return res.toString();
         } catch (JSONException e) {
             logger.error("", e);
         } catch (UnsupportedEncodingException e) {
+            logger.error("", e);
+        } catch (IOException e) {
             logger.error("", e);
         }
         return "";
