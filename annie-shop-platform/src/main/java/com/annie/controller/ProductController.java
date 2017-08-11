@@ -98,7 +98,7 @@ public class ProductController extends BaseController {
             product.setProductContent(productContent);
             product.setProductUnit(productUnit);
             product.setProductMainPic(fileName);
-            productService.updateProduct(product);
+            productService.createProduct(product);
 
             result.setResultCode(ResultCodeConstant.SUCCESS_CODE);
             result.setResultMsg(ResultCodeConstant.SUCCESS_MSG);
@@ -133,7 +133,7 @@ public class ProductController extends BaseController {
                 if (fileName != null) {
                     product.setProductMainPic(fileName);
                 }
-                productService.createProduct(product);
+                productService.updateProduct(product);
 
                 result.setResultCode(ResultCodeConstant.SUCCESS_CODE);
                 result.setResultMsg(ResultCodeConstant.SUCCESS_MSG);
